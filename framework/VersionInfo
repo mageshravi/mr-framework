@@ -1,0 +1,27 @@
+VERSION 1.0
+10-Dec-2012
+
+VERSION 1.1
+05-Feb-2013
+- added application/Rest.class.php
+- added includes/httpCodes.ini
+- modified includes/init.php
+- modified public/index.php
+- template object to be part of controller, and not part of registry
+  (use $this->template->name = value 
+    instead of $this->registry->template->name = value)
+
+VERSION 1.2
+16-Apr-2013
+- All service classes will have 'writeConn' attribute instead of 'db' attribute
+- db.class to have methods getReadConnection() and getWriteConnection()
+
+VERSION 1.3
+- All classes to have namespaces
+
+VERSION 1.3.1
+- Sql2ModelController available by default
+
+VERSION 1.3.2
+- 'application' folder renamed to 'framework'
+- Use 'setLayout()' method for setting template layout

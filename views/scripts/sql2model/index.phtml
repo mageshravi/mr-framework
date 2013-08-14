@@ -1,0 +1,16 @@
+<form method="post" action="/sql2model">
+    <textarea rows="10" cols="30" placeholder="Place your CREATE TABLE sql here" name="sql_script"></textarea><br>
+    <?php if(isset($err_model_permissions)): ?>
+        <p class="error-msg"><?php echo $err_model_permissions; ?></p>
+    <?php else: ?>
+        <button type="submit">Generate</button><br>
+    <?php endif;
+    
+    if(isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+        <p class="success-msg">Model file generated successfully!</p>
+    <?php endif;
+    
+    if(isset($_GET['status']) && $_GET['status'] == 'failure'): ?>
+        <p class="error-msg">Operation Unsuccessful!</p>
+    <?php endif; ?>
+</form>

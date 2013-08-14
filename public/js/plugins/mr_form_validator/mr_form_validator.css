@@ -1,0 +1,36 @@
+/* 
+    Document   : mr_form_validator
+    Created on : Apr 5, 2013, 1:12:37 AM
+    Author     : mageshravi
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.mrfv-err {
+    padding: 5px 10px;
+    color: white;
+    text-shadow: 1px 1px 0px #000;
+    background-color: rgba(0,0,0,.5);
+        
+    position: absolute;
+    z-index: 100;
+}
+    .mrfv-err .close {
+        margin-left: 5px;
+        padding: 0px 5px;
+        
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        
+        cursor: pointer;
+    }
+    .mrfv-err .close:hover {
+        color: black;
+        background-color: white;
+        text-shadow: none;
+    }

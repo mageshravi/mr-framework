@@ -1,0 +1,48 @@
+@charset "UTF-8"
+
+body.show-baseline {
+	background-image: url('16px_baseline.gif');
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin-bottom: 16px; /* baseline 16px; */
+}
+
+/* 960 grid system */
+
+.one-column {
+	width: 80px;
+	background-color: pink;
+}
+.two-column {
+	width: 160px;
+}
+.three-column {
+	width: 240px;
+}
+.four-column {
+	width: 320px;
+}
+.five-column {
+	width: 400px;
+}
+.six-column {
+	width: 480px;
+}
+.seven-column {
+	width: 560px;
+}
+.eight-column {
+	width: 640px;
+}
+.nine-column {
+	width: 720px;
+}
+.ten-column {
+	width: 800px;
+}
+.eleven-column {
+	width: 880px;
+}
+.twelve-column {
+	width: 960px;
+}
