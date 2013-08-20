@@ -20,14 +20,27 @@ spl_autoload_register('myAutoload');
 
 function myAutoload($fullyQualifiedClassName) {
     
-    $arr_parts = explode('\\', $fullyQualifiedClassName);
-    $className = end($arr_parts);
-    
-    $file = APPLICATION_PATH."/model/$className.class.php";
+    if(strpos($fullyQualifiedClassName, 'com\db') !== false) {
+        /* com\db => model/db.class.php */
+        $namespacePath = str_replace('com', 'model', $fullyQualifiedClassName);  
+    } elseif(strpos($fullyQualifiedClassName, APP_NAMESPACE) !== false) {
+        /* com\appname\User => model/User.class.php */
+        $namespacePath = str_replace(APP_NAMESPACE, 'model', $fullyQualifiedClassName);
+    } else
+        throw new Exception ("Class $fullyQualifiedClassName not found!");
+
+    $arr_parts = explode('\\', $namespacePath);
+
+    $file = APPLICATION_PATH;
+    foreach ($arr_parts as $dir) {
+        $file .= "/$dir";
+    }
+    $file .= ".class.php";
+
     if(file_exists($file) == FALSE)
-        return FALSE;
-    else
-        include_once $file;
+       throw new Exception ("Class $fullyQualifiedClassName not found!");
+    
+    include_once $file;
 }
 
 ?>

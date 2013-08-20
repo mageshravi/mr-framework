@@ -1,7 +1,7 @@
 <?php
 
 define('SITE_TITLE', 'MR Framework');
-define('APP_NAMESPACE', '\com\appname');
+define('APP_NAMESPACE', 'com\appname');
 
 define('COMPONENTS', APPLICATION_PATH.'/views/components');
 define('VIEW_SCRIPTS', APPLICATION_PATH.'/views/scripts');
