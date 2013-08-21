@@ -20,12 +20,9 @@ spl_autoload_register('myAutoload');
 
 function myAutoload($fullyQualifiedClassName) {
     
-    if(strpos($fullyQualifiedClassName, 'com\db') !== false) {
-        /* com\db => model/db.class.php */
-        $namespacePath = str_replace('com', 'model', $fullyQualifiedClassName);  
-    } elseif(strpos($fullyQualifiedClassName, APP_NAMESPACE) !== false) {
-        /* com\appname\User => model/User.class.php */
-        $namespacePath = str_replace(APP_NAMESPACE, 'model', $fullyQualifiedClassName);
+    if(strpos($fullyQualifiedClassName, APP_NAMESPACE) !== false) {
+        /* com\appname\model\User => model/User.class.php */
+        $namespacePath = str_replace(APP_NAMESPACE, '', $fullyQualifiedClassName);
     } else
         throw new Exception ("Class $fullyQualifiedClassName not found!");
 

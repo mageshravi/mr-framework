@@ -1,6 +1,6 @@
 <?php
 
-namespace com;
+namespace com\appname\model;
 
 class db {
 

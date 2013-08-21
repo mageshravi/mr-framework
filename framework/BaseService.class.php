@@ -18,7 +18,8 @@ class BaseService {
             
     function __construct() {        
         $this->log = Log::getInstance();
-        $this->writeConn = db::getWriteConnection();
+        $db = APP_NAMESPACE.'\\model\\db';
+        $this->writeConn = $db::getWriteConnection();
     }
 
 }
