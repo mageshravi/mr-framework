@@ -42,11 +42,11 @@ if [ -d "$dirName" ]; then
 	ServerAdmin webmaster@localhost
 
 	DocumentRoot $dirName/public
-	<Directory />\n
+	<Directory />
 		Options FollowSymLinks
 		AllowOverride None
 	</Directory>
-	<Directory /var/www/$dirName/public>
+	<Directory $dirName/public>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride FileInfo Options
 		Order allow,deny
