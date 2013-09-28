@@ -1,5 +1,4 @@
 <?php
-
 namespace com;
 
 class Template {
@@ -33,6 +32,7 @@ class Template {
     
     public function setLayout($layout) {
         $this->layout = $layout;
+        return $this;
     }
     
     /**
@@ -45,7 +45,7 @@ class Template {
         $this->viewFile = VIEW_SCRIPTS.'/'.strtolower($this->registry->controller).'/'.$this->registry->action.'.phtml';
 
         if (file_exists($this->viewFile) == false)
-            throw new Exception('View File not found in '. $this->viewFile);
+            throw new \Exception('View File not found in '. $this->viewFile);
 
         // Load variables
         foreach ($this->vars as $key => $value) {
@@ -61,7 +61,7 @@ class Template {
         if(!is_null($this->layout))
             include LAYOUTS.'/'.$this->layout.'.phtml';
         else
-            $this->content;
+            echo $this->content;
     }
 }
 

@@ -2,17 +2,18 @@
 
 class Error404Controller extends \com\BaseController {
 
-public function index() {
+    public function init() {
+        $this->template->setLayout('default');
+    }
     
-    $this->log->debug("Inside " . __METHOD__ . "()...");
-    
-    $this->template->title = SITE_TITLE.' - Page not found!';
-    
-    $this->template->layout = 'default';
+    public function indexAction() {
 
-    $this->template->show();
-}
+        $this->log->debug("Inside " . __METHOD__ . "()...");
 
+        $this->template->title = SITE_TITLE.' - Page not found!';
+
+        $this->template->show();
+    }
 
 }
 ?>

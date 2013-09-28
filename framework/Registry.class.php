@@ -1,5 +1,4 @@
 <?php
-
 namespace com;
 
 /**
@@ -8,6 +7,7 @@ namespace com;
 class Registry {
     
     private $vars = array();
+    private $requestType;
 
     public function __set($index, $value) {
         $this->vars[$index] = $value;
@@ -16,6 +16,15 @@ class Registry {
     public function __get($index) {
         return $this->vars[$index];
     }
+    
+    public function getRequestType() {
+        return $this->requestType;
+    }
+
+    public function setRequestType($requestType) {
+        $this->requestType = $requestType;
+    }
+
 }
 
 ?>

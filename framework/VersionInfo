@@ -32,3 +32,9 @@ VERSION 1.3.3
 VERSION 1.3.4
 - function to autoload classes refined
 - Model and Service classes to have namespace like "com\appname\model"
+
+VERSION 1.4
+- all controllers to implement new abstract method init()
+- all publicly callable actions to have the suffix 'Action'
+- Template::setLayout() method allows chaining
+- Request::factory() allows internal requests (HMVC implementation. Work in progress)

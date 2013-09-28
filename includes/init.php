@@ -8,6 +8,8 @@ include APPLICATION_PATH . '/framework/Log.class.php';
 
 include APPLICATION_PATH . '/framework/Registry.class.php';
 
+include APPLICATION_PATH . '/framework/Request.class.php';
+
 include APPLICATION_PATH . '/framework/Rest.class.php';
 
 include APPLICATION_PATH . '/framework/Router.class.php';

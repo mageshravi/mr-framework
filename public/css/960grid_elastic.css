@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-body.show-baseline {
-	background-image: url('16px_baseline.gif');
-}
-h1, h2, h3, h4, h5, h6, p {
-    margin-bottom: 16px; /* baseline 16px; */
-}
-
 /* 960 grid system */
 
 .envelope {
@@ -43,7 +36,7 @@ h1, h2, h3, h4, h5, h6, p {
 	-moz-transition: width .5s ease;
 }
 .five-column {
-	width: 400px;
+	width: 41.67%;  /* 400px */
 }
 .six-column {
 	width: 50%; /* 480px */
@@ -53,20 +46,20 @@ h1, h2, h3, h4, h5, h6, p {
 	-moz-transition: width .5s ease;
 }
 .seven-column {
-	width: 560px;
+	width: 58.33%; /* 560px; */
 }
 .eight-column {
-	width: 640px;
+	width: 66.67%; /* 640px; */
 }
 .nine-column {
-	width: 720px;
+	width: 75%; /* 720px; */
 }
 .ten-column {
-	width: 800px;
+	width: 83.33%; /* 800px; */
 }
 .eleven-column {
-	width: 880px;
+	width: 91.67%; /* 880px; */
 }
 .twelve-column {
-	width: 960px;
+	width: 100%; /* 960px; */
 }

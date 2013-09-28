@@ -13,7 +13,8 @@ html, body {
     -webkit-font-smoothing: subpixel-antialiased;
 }
 body {
-    font-size: 0.875em;
+    font-size: 0.875em; /* 14px */
+    font-size: 1.2em; /* 16.8px */
     background-color: #f2f2f2;
 }
 h1 {

@@ -7,7 +7,11 @@
  */
 class Sql2modelController extends \com\BaseController {
     
-    public function index() {
+    public function init() {
+        ;
+    }
+    
+    public function indexAction() {
         $this->log->debug("Inside " . __CLASS__ . " " . __FUNCTION__ . "()...");
         
         //SET TITLE

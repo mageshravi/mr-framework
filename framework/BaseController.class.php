@@ -1,5 +1,4 @@
 <?php
-
 namespace com;
 
 /**
@@ -26,7 +25,8 @@ abstract class BaseController {
         $this->template->setViewFile($controller, $action);
     }
 
-    abstract function index();
+    abstract function init();
+    abstract function indexAction();
 }
 
 ?>
