@@ -1,5 +1,4 @@
 <?php
-
 namespace com\appname\model;
 
 class db {

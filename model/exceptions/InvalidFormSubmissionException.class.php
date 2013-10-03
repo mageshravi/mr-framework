@@ -1,11 +1,10 @@
 <?php
-
-namespace com;
+namespace com\appname\model\exceptions;
 
 class InvalidFormSubmissionException extends \Exception {
     
     public function __construct($message="Invalid Form submission!") {
-        parent::__construct($message, 99);
+        parent::__construct($message, INVALID_FORM_SUBMISSION);
     }
     
     public function __toString() {

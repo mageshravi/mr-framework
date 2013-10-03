@@ -1,4 +1,5 @@
 <?php
+namespace com\appname;
 
 class Error404Controller extends \com\BaseController {
 

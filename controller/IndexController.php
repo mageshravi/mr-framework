@@ -1,4 +1,5 @@
 <?php
+namespace com\appname;
 
 class IndexController extends \com\BaseController {
 
