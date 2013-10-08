@@ -17,14 +17,10 @@ class Router {
     public $action;
 
     /**
-    *
-    * @set controller directory path
-    *
-    * @param string $path
-    *
-    * @return void
-    *
-    */
+     * 
+     * @param string $path the controller directory path
+     * @throws Exception
+     */
     function setPath($path) {
         // CHECK IF PATH IS DIRECTORY
         if (is_dir($path) == false) {
@@ -132,7 +128,7 @@ class Router {
         Log::debug("Controller: ".$this->controller);
         Log::debug("Action: ".$this->action);
 
-        $this->file = $this->path .'/'. $this->controller . 'Controller.php';
+        $this->file = $this->path .'/'. $this->controller . 'Controller.class.php';
     }
 }
 

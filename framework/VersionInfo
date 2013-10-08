@@ -41,3 +41,4 @@ VERSION 1.4
 
 VERSION 1.4.1
 - all controller classes to have namespace like "com\appname\controller"
+- all controller classes to have suffix ".class.php"
