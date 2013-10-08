@@ -63,7 +63,7 @@ class Router {
         // new instance of controller
         $class = $this->controller . 'Controller';
         Log::debug("Controller class: ".$class);
-        $fullyQualifiedClassName = APP_NAMESPACE.'\\'.$class;
+        $fullyQualifiedClassName = APP_NAMESPACE.'\\controller\\'.$class;
         $controller = new $fullyQualifiedClassName($registry);
 
         $action = $this->action.'Action';

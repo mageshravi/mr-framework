@@ -39,7 +39,7 @@ class db {
                 self::$writeConn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             }
             catch(\PDOException $e) {
-                Log::debug($e->getMessage());
+                \com\Log::debug($e->getMessage());
                 die('Connection error!');
             }
         }
@@ -64,12 +64,12 @@ class db {
                 $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             }
             catch(\PDOException $e) {
-                Log::debug($e->getMessage());
+                \com\Log::debug($e->getMessage());
             }
 
             if(!$connection) {
                 // Couldn't connect to this server. So remove it.
-                Log::debug("Could not connect to server {$servers[$key]}...");
+                \com\Log::debug("Could not connect to server {$servers[$key]}...");
                 unset($servers[$key]);
             }
         }

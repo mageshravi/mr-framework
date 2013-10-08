@@ -1,5 +1,5 @@
 <?php
-namespace com\appname;
+namespace com\appname\controller;
 
 /**
  * Description of Sql2ModelController

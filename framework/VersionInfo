@@ -38,3 +38,6 @@ VERSION 1.4
 - all publicly callable actions to have the suffix 'Action'
 - Template::setLayout() method allows chaining
 - Request::factory() allows internal requests (HMVC implementation. Work in progress)
+
+VERSION 1.4.1
+- all controller classes to have namespace like "com\appname\controller"
