@@ -179,5 +179,3 @@ classFile;
         $this->log->debug("Peak memory usage in " . __CLASS__ . " " . __FUNCTION__ . "() : " . (memory_get_peak_usage(TRUE) / 1024) . " KB");
     }
 }
-
-?>

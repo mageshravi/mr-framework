@@ -42,3 +42,13 @@ VERSION 1.4
 VERSION 1.4.1
 - all controller classes to have namespace like "com\appname\controller"
 - all controller classes to have suffix ".class.php"
+
+VERSION 1.4.1.1
+- Rest::processRequest() returns filtered input data. 
+- Also accepts optional filter definitions. 
+- Strict mode to check if the request parameters are identical to the given filter definition.
+- IndexController renamed to HomeController
+
+VERSION 1.4.1.2
+- Rest::processRequest() deprecated. Instead, use Request object within controller.
+- Web root to be renamed "public_html"

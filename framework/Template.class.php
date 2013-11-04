@@ -64,5 +64,3 @@ class Template {
             echo $this->content;
     }
 }
-
-?>

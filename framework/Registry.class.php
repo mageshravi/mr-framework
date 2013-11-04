@@ -8,7 +8,7 @@ class Registry {
     
     private $vars = array();
     private $requestType;
-
+    
     public function __set($index, $value) {
         $this->vars[$index] = $value;
     }
@@ -26,5 +26,3 @@ class Registry {
     }
 
 }
-
-?>

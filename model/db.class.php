@@ -92,7 +92,3 @@ class db {
     }
 
 }
-
-/*** end of class ***/
-
-?>

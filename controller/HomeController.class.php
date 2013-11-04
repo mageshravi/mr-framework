@@ -1,7 +1,7 @@
 <?php
 namespace com\appname\controller;
 
-class IndexController extends \com\BaseController {
+class HomeController extends \com\BaseController {
 
     public function init() {
         $this->template->setLayout('default');
@@ -28,5 +28,3 @@ class IndexController extends \com\BaseController {
     }
 
 }
-
-?>

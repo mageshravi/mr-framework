@@ -6,6 +6,9 @@ namespace com;
  */
 class Router {
 
+    /** @var Log $log */
+    private $log;
+    
     private $path;
 
     private $args = array();
@@ -37,6 +40,7 @@ class Router {
      */
     public function loader(Registry &$registry) {
         
+        $this->log = Log::getInstance();
         $internalRequest = FALSE;
 
         if($registry->getRequestType() === 'internal')
@@ -54,11 +58,10 @@ class Router {
         }
 
         // include the controller file
-        include $this->file;
+        include_once $this->file;
 
         // new instance of controller
         $class = $this->controller . 'Controller';
-        Log::debug("Controller class: ".$class);
         $fullyQualifiedClassName = APP_NAMESPACE.'\\controller\\'.$class;
         $controller = new $fullyQualifiedClassName($registry);
 
@@ -81,11 +84,10 @@ class Router {
 
     private function getControllerAndAction() {
         // GET ROUTE FROM URL
-        $route = (empty($_GET['rt'])) ? '' : $_GET['rt'];
+        $route = filter_input(INPUT_GET, 'rt');
+        $this->log->debug("Route: $route");
 
-        if (empty($route)) {
-            $route = 'Index';
-        } else {
+        if (!is_null($route)) {
             // GET PARTS OF ROUTE
             $parts = explode('/', $route);
 
@@ -98,38 +100,23 @@ class Router {
                 // ACTION
                 $this->action = str_replace('-','',$parts[1]);  /* Ignore hyphens in url */
             }
-
-            $partsCount = count($parts);
-
-            for($i=2; $i < $partsCount; $i=$i+2) {
-                // GET PARAMETERS
-                if(array_key_exists($i+1, $parts))
-                    $_GET[$parts[$i]] = $parts[($i+1)];
-                else
-                    $_GET[$parts[$i]] = "";
-
-                Log::debug("GET Parameter : {$parts[$i]} = {$_GET[$parts[$i]]}");
-            }
         }
-        Log::debug("Route: ".$route);
 
         $this->resolveFilePath();
     }
 
     private function resolveFilePath() {
         if (empty($this->controller)) {
-            $this->controller = 'Index';
+            $this->controller = 'Home';
         }
 
         if (empty($this->action)) {
             $this->action = 'index';
         }
         
-        Log::debug("Controller: ".$this->controller);
-        Log::debug("Action: ".$this->action);
+        $this->log->debug("Controller: ".$this->controller);
+        $this->log->debug("Action: ".$this->action);
 
         $this->file = $this->path .'/'. $this->controller . 'Controller.class.php';
     }
 }
-
-?>

@@ -41,12 +41,12 @@ if [ -d "$dirName" ]; then
 	ServerName $serverName
 	ServerAdmin webmaster@localhost
 
-	DocumentRoot $dirName/public
+	DocumentRoot $dirName/public_html
 	<Directory />
 		Options FollowSymLinks
 		AllowOverride None
 	</Directory>
-	<Directory $dirName/public>
+	<Directory $dirName/public_html>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride FileInfo Options
 		Order allow,deny

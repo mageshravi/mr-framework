@@ -17,4 +17,3 @@ class Error404Controller extends \com\BaseController {
     }
 
 }
-?>

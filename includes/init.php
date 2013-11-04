@@ -42,4 +42,55 @@ function myAutoload($fullyQualifiedClassName) {
     include_once $file;
 }
 
-?>
+set_exception_handler('myExceptionHandler');
+
+function myExceptionHandler(Exception $e) {
+    // For all uncaught exceptions
+    header("HTTP/1.1 500 Internal Server Error");
+    echo '<h1>Internal Server Error</h1>';
+    
+    if(error_reporting() !== 0) {
+        // print trace when error reporting is ON
+        echo '<p>', $e->getMessage(), '</p>';
+        echo '<pre>', $e->getTraceAsString(), '</pre>';
+    }
+}
+
+set_error_handler("myErrorHandler");
+
+function myErrorHandler($errno, $errstr, $errfile, $errline) {
+    
+    if (!(error_reporting() & $errno)) {
+        // This error code is not included in error_reporting
+        return;
+    }
+
+    switch ($errno) {
+        case E_USER_ERROR:
+            header("HTTP/1.1 500 Internal Server Error");
+            echo "<b>USER ERROR</b> [$errno] $errstr<br>";
+            echo "Fatal error in file $errfile, line $errline";
+            exit(1);
+            break;
+
+        case E_USER_WARNING:
+            echo "<b>USER WARNING</b> [$errno] $errstr<br>";
+            break;
+
+        case E_USER_NOTICE:
+            echo "<b>USER NOTICE</b> [$errno] $errstr<br>";
+            break;
+        
+        case E_ERROR:
+            header("HTTP/1.1 500 Internal Server Error");
+            exit(1);
+            break;
+        
+        default:
+            echo "Unknown error type: [$errno] $errstr<br>";
+            break;
+    }
+
+    /* Don't execute PHP internal error handler */
+    return true;
+}
