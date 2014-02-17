@@ -53,7 +53,7 @@ class Router {
         
         // is controller file readable?
         if (is_readable($this->file) == false) {
-            $this->file = $this->path.'/Error404.php';
+            $this->file = $this->path.'/Error404.class.php';
             $this->controller = 'Error404';
         }
 

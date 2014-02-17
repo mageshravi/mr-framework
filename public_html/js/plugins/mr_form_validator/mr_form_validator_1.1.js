@@ -47,7 +47,7 @@ $.fn.validateForm = function(jsonFormDef) {
     try {
         
         // reset old error messages
-        $(this).find('span.error.msg').remove();
+        $(this).find('span.error-msg').remove();
         
         for(i=0; i<jsonFormDef.elements.length; i++) {
 

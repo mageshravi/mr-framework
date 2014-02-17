@@ -14,7 +14,7 @@ html, body {
 }
 body {
     font-size: 0.875em; /* 14px */
-    font-size: 1.2em; /* 16.8px */
+    line-height: 1.2em; /* 16.8px */
     background-color: #f2f2f2;
 }
 h1 {

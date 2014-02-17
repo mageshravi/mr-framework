@@ -19,9 +19,6 @@ include('config.php');
 /* include the init.php file */
 include 'init.php';
 
-require_once 'commonFunctions.inc.php';
-require_once 'exceptions.inc.php';
-
 /* setting default timezone */
 date_default_timezone_set("Asia/Calcutta");
 
