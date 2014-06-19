@@ -6,17 +6,13 @@ namespace com;
  */
 class BaseService {
     
-    /** @var Log */
-    protected $log;
-    
     /** @var \PDO */
     protected $writeConn;
     
     /** @var \PDO */
     protected $readConn;
             
-    function __construct() {        
-        $this->log = Log::getInstance();
+    function __construct() {
         $db = APP_NAMESPACE.'\\model\\db';
         $this->writeConn = $db::getWriteConnection();
     }

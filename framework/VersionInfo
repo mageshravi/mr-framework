@@ -56,3 +56,15 @@ VERSION 1.4.1.2
 VERSION 1.4.1.3
 - exceptions.inc.php removed
 - MRException to have constants that define exception codes
+
+VERSION 1.4.2
+- SQL2ModelController generates model classes, validator functions and exception classes
+- SEO friendly URL parameters can be accessed from the view file using $_seoParams array
+
+VERSION 1.4.2.1
+- Removed the destructor from Log class that causes missing log statements in some cases
+
+VERSION 1.4.3
+- Framework logs the peak memory usage and execution time for each request
+- Log object removed from Router, BaseController and BaseService
+- log_debug() function added to log from anywhere without instantiating a log object

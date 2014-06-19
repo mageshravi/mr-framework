@@ -11,9 +11,6 @@ abstract class BaseController {
     /** @var Template */
     protected $template;
     
-    /** @var Log */
-    protected $log;
-
     /**
      * 
      * @param Registry $registry to get the controller and action values
@@ -21,7 +18,6 @@ abstract class BaseController {
     function __construct(Registry &$registry) {
         $this->request = new Request();
         $this->template = new Template($registry);
-        $this->log = Log::getInstance();
         
         // for web requests process params
         if($registry->getRequestType() !== 'internal')

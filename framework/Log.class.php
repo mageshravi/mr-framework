@@ -37,15 +37,6 @@ class Log {
         return new Log();
     }
 
-    function __destruct() {
-        
-        if(is_resource(self::$fileHandle)) {
-            fwrite(self::$fileHandle, "- close -\n");
-            fclose (self::$fileHandle);
-            self::$fileHandle = NULL;
-        }
-    }
-    
     /**
      *
      * @param string $message 

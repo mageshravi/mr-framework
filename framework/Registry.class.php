@@ -8,6 +8,7 @@ class Registry {
     
     private $vars = array();
     private $requestType;
+    private $execStartTime;
     
     public function __set($index, $value) {
         $this->vars[$index] = $value;
@@ -24,5 +25,13 @@ class Registry {
     public function setRequestType($requestType) {
         $this->requestType = $requestType;
     }
+    
+    public function getExecStartTime() {
+        return $this->execStartTime;
+    }
 
+    public function setExecStartTime($execStartTime) {
+        $this->execStartTime = $execStartTime;
+        return $this;
+    }
 }

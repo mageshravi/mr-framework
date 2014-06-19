@@ -1,16 +1,219 @@
-<form method="post" action="/sql2model">
-    <textarea rows="10" cols="30" placeholder="Place your CREATE TABLE sql here" name="sql_script"></textarea><br>
-    <?php if(isset($err_model_permissions)): ?>
-        <p class="error-msg"><?php echo $err_model_permissions; ?></p>
-    <?php else: ?>
-        <button type="submit">Generate</button><br>
-    <?php endif;
+<style type="text/css">
+.parsed-tables {
+    margin-left: 25px;
+    width: 65%;
+    text-align: left;
+    float: left;
+}
+.sql-tables .table-name {
+    cursor: pointer;
+}
+.sql-tables li {
+    padding: 5px 0;
+}
+.sql-fields {
+    display: none;
+}
+.table > .tr {
+    display: table-row;
+}
+.table > .tr > .th,
+.table > .tr > .td {
+    padding: 10px;
+    display: table-cell;
+}
+.table > .tr > .th {
+    font-weight: bold;
+    background-color: silver;
+}
+.code {
+    font-family: monospace;
+    color: blue;
+}
+.code input {
+    border: none;
+    font-family: inherit;
+    min-width: 300px;
+}
+.action-buttons {
+    padding: 0 10px 10px;
+    text-align: left;
+    float: right;
+    right: 0px;
+    background: gainsboro;
+    position: fixed;
+}
+</style>
+<script type="text/javascript">
+$(function() {
     
-    if(isset($_GET['status']) && $_GET['status'] == 'success'): ?>
-        <p class="success-msg">Model file generated successfully!</p>
-    <?php endif;
+    $sqlTables_li = $('.sql-tables > li[data-table-index]');
+    $modelTable_checkbox = $('.sql-tables input[type="checkbox"]');
     
-    if(isset($_GET['status']) && $_GET['status'] == 'failure'): ?>
-        <p class="error-msg">Operation Unsuccessful!</p>
-    <?php endif; ?>
-</form>
+    bindUIAction_showFields();
+    
+    bindUIAction_downloadCSV();
+    
+    bindUIAction_selectAll();
+    
+    bindUIAction_selectNone();
+    
+    bindUIAction_selectInvert();
+    
+    function bindUIAction_showFields() {
+        $('.envelope').on('click', '.sql-tables .table-name', function() {
+            $(this).siblings('.sql-fields').slideDown();
+        });
+    }
+    
+    function bindUIAction_downloadCSV() {
+        $('#download-csv').click(function() {
+            sql_JSON = '[';
+            $sqlTables_li.find('input[name=model_table]:checked').each(function() {
+                
+                tableName = $(this).next('.table-name').text();
+                className = 'com/' + $(this).siblings('span[data-namespace]').attr('data-namespace')+'/model/'
+                            + $(this).siblings('span[data-namespace]').find('input').val();
+                
+                $(this).siblings('div.table.sql-fields').find('.tr').each(function() {
+                    if(sql_JSON !== '[')
+                        sql_JSON += ',';
+                
+                    sql_JSON += '{"tableName":"'+tableName+'",'
+                            + '"className":"'+className+'",'
+                            + '"name":"'+$(this).find('.td.name').text()+'",'
+                            + '"type":"'+$(this).find('.td.type').text()+'",'
+                            + '"notNull":"'+$(this).find('.td.notNull').attr('data-not-null')+'",'
+                            + '"length":"'+$(this).find('.td.length').text()+'"}';
+                });  
+                        
+            });
+            sql_JSON += ']';
+            csv = JSON2CSV(sql_JSON);
+            
+            uri = 'data:text/csv;charset=utf-8,' + escape(csv);
+    
+            link = document.createElement("a");    
+            link.href = uri;
+
+            link.style = "visibility:hidden";
+            link.download = "model.csv";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+        
+        function JSON2CSV(sql_JSON) {
+            arr_sql = typeof sql_JSON !== 'object' ? JSON.parse(sql_JSON) : sql_JSON;
+
+            str = '';
+            line = '';
+
+            for (index in arr_sql[0]) {
+                value = index + "";
+                line += '"' + value.replace(/"/g, '""') + '",';
+            }
+            line += '"validation","validationType","minLength","exceptionNamespace",';
+            line += '"exceptionCode","exceptionMsg",';
+            console.log(line);
+            
+            line = line.slice(0, -1);
+            str += line + '\r\n';
+            for (i = 0; i < arr_sql.length; i++) {
+                line = '';
+                for (index in arr_sql[i]) {
+                    value = arr_sql[i][index] + "";
+                    line += '"' + value.replace(/"/g, '""') + '",';
+                }
+                line = line.slice(0, -1);
+                str += line + '\r\n';
+            }
+            return str;
+        }
+    }
+    
+    function bindUIAction_selectAll() {
+        $('#select-all').click(function() {
+            $modelTable_checkbox.filter(':not(:checked)').prop('checked', true);
+        });
+    }
+    
+    function bindUIAction_selectNone() {
+        $('#select-none').click(function() {
+            $modelTable_checkbox.filter(':checked').prop('checked', false);
+        });
+    }
+    
+    function bindUIAction_selectInvert() {
+        $('#invert-select').click(function() {
+            $arr_selectedItems = $modelTable_checkbox.filter(':checked');
+            $arr_unselectedItems = $modelTable_checkbox.filter(':not(:checked)');
+            $arr_selectedItems.prop('checked', false);
+            $arr_unselectedItems.prop('checked', true);
+        });
+    }
+});
+</script>
+
+<?php if(empty($_POST)): ?>
+    <form method="post" action="/sql2model">
+        <textarea rows="10" cols="30" placeholder="Place your CREATE TABLE sql here" name="sql_script" required="required"></textarea><br>
+        <?php if(isset($err_model_permissions)): ?>
+            <p class="error-msg"><?php echo $err_model_permissions; ?></p>
+        <?php else: ?>
+            Namespace:
+            <span class="code">
+                \com\<input type="text" name="app_namespace" required="required">
+            </span><br>
+            <button type="submit">Generate</button><br>
+        <?php endif;
+ 
+        if(isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+            <p class="success-msg">Model file generated successfully!</p>
+        <?php endif;
+
+        if(isset($_GET['status']) && $_GET['status'] == 'failure'): ?>
+            <p class="error-msg">Operation Unsuccessful!</p>
+        <?php endif; ?>
+    </form>
+<?php elseif(isset($arr_table)): ?>
+<div>
+    <div class="parsed-tables align-left">
+        <h2>PARSED TABLES & FIELDS</h2>
+        <ol class="sql-tables">
+            <?php $i= 0;
+            foreach ($arr_table as $row): ?>
+            <li data-table-index=<?php echo $i++; ?>>
+                <input type="checkbox" name="model_table" checked="checked">
+                <strong class="table-name"><?php echo $row['tableName']; ?> </strong> &nbsp;
+                <span class="code" data-namespace="<?php echo $row['app_namespace'];?>">
+                    com\<?php echo $row['app_namespace'];?>\model\<input type="text" name="class_name" value="<?php echo $row['className']; ?>">
+                </span>
+                <div class="table sql-fields">
+                   <?php $j=1;
+                    foreach ($row['fields'] as $field): ?>
+                    <div class="tr">
+                        <div class="td"><?php echo "$i.".$j++; ?></div>
+                        <div class="td name"><?php echo $field['name']; ?></div>
+                        <div class="td type"><?php echo $field['type']; ?></div>
+                        <div class="td length"><?php echo $field['length']; ?></div>
+                        <div class="td notNull" data-not-null="<?php echo $field['notNull']; ?>"><?php if($field['notNull']) echo'NOT NULL'; else echo 'NULL'; ?></div>
+                    </div>
+                   <?php endforeach; ?>
+                </div>
+            </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <div class="action-buttons">
+        <h2>Action Buttons</h2>
+        <button id="select-all">Select All</button><br>
+        <button id="select-none">Select None</button><br>
+        <button id="invert-select">Select Invert</button><br>
+        <button id="download-csv">Download CSV</button><br>
+        <a href="/sql2model/uploadcsv">Next</a>
+    </div>
+    <div class="clear-float"></div>
+</div>
+<?php endif; ?>

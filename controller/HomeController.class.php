@@ -9,7 +9,7 @@ class HomeController extends \com\BaseController {
     
     public function indexAction() {
         
-        $this->log->debug("Inside " . __METHOD__ . "()...");
+        log_debug("Inside " . __METHOD__ . "()");
 
         // set title
         $this->template->title = SITE_TITLE;
@@ -24,7 +24,7 @@ class HomeController extends \com\BaseController {
                 ->setLayout('default')  // SET THE LAYOUT (OPTIONAL)
                 ->show();               // THEN RENDER VIEW FILE
 
-        $this->log->debug("Peak memory usage in " . __METHOD__ . " = " . (memory_get_peak_usage(TRUE) / 1024) . " KB");
+        log_debug("Peak memory usage in " . __METHOD__ . " = " . (memory_get_peak_usage(TRUE) / 1024) . " KB");
     }
 
 }

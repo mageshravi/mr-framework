@@ -44,8 +44,7 @@ class Request {
         
         $_params = array();
         
-        $route = filter_input(INPUT_GET, 'rt');
-        $_seoParams = $this->getSEOQueryParams($route);
+        $_seoParams = self::getSEOQueryParams();
         
         // process GET query parameters by default
         // POST, PUT can happen to a url containing query parameters
@@ -75,7 +74,8 @@ class Request {
         $this->_params = $_params;
     }
     
-    private function getSEOQueryParams($route) {
+    public static function getSEOQueryParams() {
+        $route = filter_input(INPUT_GET, 'rt');
         $arr_parts = explode('/', $route);
         $partsCount = count($arr_parts);
         

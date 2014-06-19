@@ -51,7 +51,10 @@ class Template {
         foreach ($this->vars as $key => $value) {
             $$key = $value;
         }
-
+        
+        // Make SEO friendly GET params available to the view file
+        $_seoParams = Request::getSEOQueryParams();
+        
         ob_start();
         include $this->viewFile;
         $this->content = ob_get_contents();

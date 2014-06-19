@@ -6,9 +6,6 @@ namespace com;
  */
 class Router {
 
-    /** @var Log $log */
-    private $log;
-    
     private $path;
 
     private $args = array();
@@ -40,7 +37,6 @@ class Router {
      */
     public function loader(Registry &$registry) {
         
-        $this->log = Log::getInstance();
         $internalRequest = FALSE;
 
         if($registry->getRequestType() === 'internal')
@@ -80,12 +76,17 @@ class Router {
         // init, then run
         $controller->init();
         $controller->$action();
+        
+        log_debug("Response sent for ". $this->controller .'/'. $this->action);
+        log_debug("Peak memory usage: ". (memory_get_peak_usage(TRUE) / 1024) ." KB");
+        log_debug('Execution time: '. (microtime(TRUE) - $registry->getExecStartTime()) .' seconds');
     }
 
     private function getControllerAndAction() {
         // GET ROUTE FROM URL
         $route = filter_input(INPUT_GET, 'rt');
-        $this->log->debug("Route: $route");
+        log_debug("\n-- New Request --");
+        log_debug("Route: $route");
 
         if (!is_null($route)) {
             // GET PARTS OF ROUTE
@@ -114,8 +115,8 @@ class Router {
             $this->action = 'index';
         }
         
-        $this->log->debug("Controller: ".$this->controller);
-        $this->log->debug("Action: ".$this->action);
+        log_debug("Controller: ".$this->controller);
+        log_debug("Action: ".$this->action);
 
         $this->file = $this->path .'/'. $this->controller . 'Controller.class.php';
     }

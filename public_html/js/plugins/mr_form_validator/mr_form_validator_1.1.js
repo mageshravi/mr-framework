@@ -47,7 +47,7 @@ $.fn.validateForm = function(jsonFormDef) {
     try {
         
         // reset old error messages
-        $(this).find('span.error-msg').remove();
+        $(this).find('span.error.msg-block').remove();
         
         for(i=0; i<jsonFormDef.elements.length; i++) {
 
@@ -58,7 +58,7 @@ $.fn.validateForm = function(jsonFormDef) {
                 continue;
 
             ipValue = $ipElement.val();
-
+            
             try {
                 if(curElement.required !== undefined) {
                     if(ipValue.length === 0)
@@ -110,6 +110,8 @@ $.fn.validateForm = function(jsonFormDef) {
                 }
                 
             } catch (e) {
+                console.log('Error while validating element: '+curElement.selector);
+                console.log($ipElement);
                 displayFormValidatorError($ipElement, e);
                 throw 'Form validation error!';
             }       
@@ -123,5 +125,5 @@ $.fn.validateForm = function(jsonFormDef) {
 };
 
 function displayFormValidatorError($ipElement, message) {
-    $('<span class="error-msg">'+ message +'</span>').insertAfter($ipElement);
+    $('<span class="error msg-block">'+ message +'</span>').insertAfter($ipElement);
 }

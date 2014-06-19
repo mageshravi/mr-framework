@@ -9,7 +9,7 @@ class Error404Controller extends \com\BaseController {
     
     public function indexAction() {
 
-        $this->log->debug("Inside " . __METHOD__ . "()...");
+        log_debug("Inside " . __METHOD__ . "()");
 
         $this->template->title = SITE_TITLE.' - Page not found!';
 

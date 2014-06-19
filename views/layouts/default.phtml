@@ -5,26 +5,27 @@
         <title><?php if(isset($title)) echo stripslashes($title); ?></title>
         <link rel="stylesheet" type="text/css" media="screen" href="/css/master_reset.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="/css/default.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/mr_style_lib.css"/>
         <?php 
         loadComponent('StylesheetLoader');
         if(isset($css))
             linkStylesheets($css);
         ?>
-        <script type="text/javascript" src="/js/jquery/jquery-1.9.1.min.js" ></script>
-        <script type="text/javascript" src="/js/jquery/jquery-ui-1.10.0.custom.min.js"></script>
+        <script type="text/javascript" src="/js/jquery/jquery-1.11.0.min.js" ></script>
+        <script type="text/javascript" src="/js/jquery/jquery-ui-1.10.4.min.js"></script>
     </head>
     <body>
         <div align="center">
             <div class="envelope">
                 <header>
-                    Magesh Ravi's PHP Framework
+                    <h1>Hello!</h1>
                 </header>
                 <nav></nav>
 
                 <?php echo $this->content; ?>
 
                 <footer>
-                    Copyrights &copy; 2011-2012 mageshravi
+                    Copyrights &copy; 2011-<?php echo date('Y'); ?> Magesh Ravi
                 </footer>
             </div>
         </div>

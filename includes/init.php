@@ -18,6 +18,8 @@ include APPLICATION_PATH . '/framework/Template.class.php';
 
 include APPLICATION_PATH . '/framework/Cache.class.php';
 
+include 'commonFunctions.inc.php';
+
 spl_autoload_register('myAutoload');
 
 function myAutoload($fullyQualifiedClassName) {

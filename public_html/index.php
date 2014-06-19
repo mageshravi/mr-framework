@@ -1,4 +1,5 @@
 <?php
+$execStartTime = microtime(TRUE);
 
 session_start();
 
@@ -23,6 +24,7 @@ include 'init.php';
 date_default_timezone_set("Asia/Calcutta");
 
 $registry = new \com\Registry();
+$registry->setExecStartTime($execStartTime);
 
 $router = new \com\Router();
 $router->setPath(APPLICATION_PATH . '/controller');
@@ -31,5 +33,3 @@ $router->setPath(APPLICATION_PATH . '/controller');
 
 // LOAD CONTROLLER
 $router->loader($registry);
-
-?>
